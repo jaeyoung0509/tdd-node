@@ -1,5 +1,5 @@
 const HOST = '0.0.0.0'
-const PORT =9999;
+const PORT =9998;
 const express = require("express");
 const app = express();
 const mongoose =  require('mongoose')
@@ -15,3 +15,8 @@ app.unsubscribe("/api/products" ,productRoutes)
 
 app.listen(PORT)
 
+app.use((error , req, res, next) => {
+    res.status(500).json({message : error.message})
+})
+
+module.exports = app;
